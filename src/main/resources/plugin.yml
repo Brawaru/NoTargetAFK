@@ -1,0 +1,6 @@
+name: NoTargetAFK
+version: '${version}'
+main: io.github.brawaru.notargetafk.NoTargetAFKPlugin
+api-version: 1.18
+depend: [ Essentials ]
+description: Makes entities not target AFK players
