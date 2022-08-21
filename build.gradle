@@ -1,16 +1,15 @@
 plugins {
     id 'java'
+    id 'kr.entree.spigradle' version '2.4.2'
+    id "com.modrinth.minotaur" version "2.+"
+    id 'maven-publish'
 }
 
 group = 'io.github.brawaru'
-version = '1.0.0'
 
 repositories {
     mavenCentral()
-    maven {
-        name = 'spigotmc-repo'
-        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
-    }
+    spigot()
     maven {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
@@ -22,10 +21,59 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
+    compileOnly spigot('1.19.2')
     compileOnly 'net.essentialsx:EssentialsX:2.19.0'
     compileOnly 'org.jetbrains:annotations:23.0.0'
 }
+
+spigot {
+    authors 'Brawaru'
+    apiVersion '1.18'
+    depends 'Essentials'
+    description 'Addon for EssentialsX that prevents mobs from targeting AFK players.'
+    permissions {
+        'notargetafk.mobs-lose-track' {
+            description = 'Whether all entities should lose track of player when they go AFK.'
+            defaults = true
+        }
+        'notargetafk.mobs-dont-target' {
+            description = 'Whether the player should not be targeted when they are AFK.'
+            defaults = true
+        }
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "notargetafk"
+    versionType = "release"
+    uploadFile = jar
+    gameVersions = ["1.19", "1.19.1", "1.19.2"]
+    loaders = ["spigot", "paper", "purpur"]
+    dependencies {
+        required.project "essentialsx"
+    }
+    syncBodyFrom = rootProject.file("README.md").text
+
+    def changeLogFile = rootProject.file('$RELEASE-NOTES.md')
+    if (changeLogFile.exists()) {
+        changelog = changeLogFile.getText('UTF-8')
+    }
+}
+
+tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories.clear()
+}
+
+tasks.publish.finalizedBy(tasks.modrinth)
 
 def targetJavaVersion = 17
 java {
@@ -39,21 +87,12 @@ java {
 
 tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        options.release = targetJavaVersion
-    }
-}
-
-processResources {
-    def props = [version: version]
-    inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
-        expand props
+        options.release.set(targetJavaVersion)
     }
 }
 
 gradle.projectsEvaluated {
-    tasks.withType(JavaCompile){
+    tasks.withType(JavaCompile) {
         options.compilerArgs << "-Xlint:deprecation"
     }
 }
