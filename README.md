@@ -8,8 +8,8 @@ Essentials AFK status does not protect you from mobs. You can of course enable
 freeze function, but mobs will still try to attack you: skeletons will shoot
 arrows, creepers come close and explode.
 
-This plugin changes that. Now, whenever you go AFK, all mobs just lose 
-interest in you. They will still spawn, and wander around you, but won't 
+This plugin changes that. Now, whenever you go AFK, all mobs just lose
+interest in you. They will still spawn, and wander around you, but won't
 target or attack you like you don't exist or one of their own.
 
 > **Note**
@@ -23,6 +23,24 @@ target or attack you like you don't exist or one of their own.
 
 Install alongside the Essentials plugin. This plugin currently does not have
 configuration or permissions, these will probably be added in the future.
+
+## Configuration options
+
+The plugin itself is currently not configurable.
+
+<details>
+<summary>Permissions available</summary>
+
+- **`notargetafk.mobs-lose-track`** \
+  Whether all entities should lose track of player when they go AFK.
+
+  **Default**: true.
+- **`notargetafk.mobs-dont-target`** \
+  Whether the player should not be targeted when they are AFK.
+
+  **Default**: true.
+
+</details>
 
 ## Feedback and bug reports
 
@@ -41,7 +59,7 @@ reproducible in newer builds.
 
 ## Credits
 
-This project would not exist without the support of [Fundy's][fundy] offline 
+This project would not exist without the support of [Fundy's][fundy] offline
 chat community.
 
 [issues]: https://github.com/Brawaru/NoTargetAFK/issues
