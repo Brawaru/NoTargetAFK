@@ -21,8 +21,7 @@ target or attack you like you don't exist or one of their own.
 
 ## Usage
 
-Install alongside the Essentials plugin. This plugin currently does not have
-configuration or permissions, these will probably be added in the future.
+Just install alongside the [EssentialsX][essx] plugin.
 
 ## Configuration options
 
@@ -62,5 +61,6 @@ reproducible in newer builds.
 This project would not exist without the support of [Fundy's][fundy] offline
 chat community.
 
+[essx]: https://modrinth.com/plugin/essentialsx
 [issues]: https://github.com/Brawaru/NoTargetAFK/issues
 [fundy]: https://www.twitch.tv/fundy
