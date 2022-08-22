@@ -61,8 +61,6 @@ modrinth {
     }
 }
 
-tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
