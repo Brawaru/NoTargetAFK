@@ -2,7 +2,7 @@
 
 > Prevents mobs from targeting AFK players.
 
-# What is this?
+## What is this?
 
 Essentials AFK status does not protect you from mobs. You can of course enable
 freeze function, but mobs will still try to attack you: skeletons will shoot
@@ -19,7 +19,7 @@ target or attack you like you don't exist or one of their own.
 > you and roar endlessly. This unfortunately cannot be prevented as there no
 > APIs for that, so don't go AFK in places where Warden can spawn :)
 
-# Usage
+## Usage
 
 Install alongside the Essentials plugin. This plugin currently does not have
 configuration or permissions, these will probably be added in the future.
